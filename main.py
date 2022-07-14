@@ -121,40 +121,40 @@ def main():
             if request.product in shop.items:
                 if request.amount <= shop.items[request.product]:
                     print("Нужное количество товара есть в магазине!")
+                    if store.get_free_space > request.amount:
+                        print(f"Курьер забрал {request.amount} {request.product} из {request.from_}")
+                        print(f"Курьер везет {request.amount} {request.product} из {request.from_} в {request.to}")
+                        print(f"Курьер доставил {request.amount} {request.product} в {request.to}")
+                        shop.remove(request.product, request.amount)
+                        store.add(request.product, request.amount)
+                    else:
+                        print("На складе не хвататет места! Попробуй уменьшить количество товара!")
+                        pass
                 else:
                     print("Нет нужного количества товара в магазине!")
-                    break
+                    pass
             else:
                 print("Такого товара нет в магазине!")
-                break
-            if store.get_free_space > request.amount:
-                print(f"Курьер забрал {request.amount} {request.product} из {request.from_}")
-                print(f"Курьер везет {request.amount} {request.product} из {request.from_} в {request.to}")
-                print(f"Курьер доставил {request.amount} {request.product} в {request.to}")
-                shop.remove(request.product, request.amount)
-                store.add(request.product, request.amount)
-            else:
-                print("На складе не хвататет места! Попробуй уменьшить количество товара!")
-                break
+                continue
         elif request.to in "магазин":
             if request.product in store.items:
                 if request.amount <= store.items[request.product]:
                     print("Нужное количество товара есть на складе!")
+                    if shop.get_free_space > request.amount and shop.get_unique_items_count <= 5:
+                        print(f"Курьер забрал {request.amount} {request.product} из {request.from_}")
+                        print(f"Курьер везет {request.amount} {request.product} из {request.from_} в {request.to}")
+                        print(f"Курьер доставил {request.amount} {request.product} в {request.to}")
+                        store.remove(request.product, request.amount)
+                        shop.add(request.product, request.amount)
+                    else:
+                        print("В магазине не хвататет места! Попробуй уменьшить количество товара!")
+                        pass
                 else:
                     print("Нет нужного количества товара на складе!")
-                    break
+                    pass
             else:
                 print("Такого товара нет в магазине!")
-                break
-            if shop.get_free_space > request.amount and shop.get_unique_items_count <= 5:
-                print(f"Курьер забрал {request.amount} {request.product} из {request.from_}")
-                print(f"Курьер везет {request.amount} {request.product} из {request.from_} в {request.to}")
-                print(f"Курьер доставил {request.amount} {request.product} в {request.to}")
-                store.remove(request.product, request.amount)
-                shop.add(request.product, request.amount)
-            else:
-                print("В магазине не хвататет места! Попробуй уменьшить количество товара!")
-                break
+                continue
 
         print(f"На складе хранится:")
         for product, amount in store.get_items.items():
