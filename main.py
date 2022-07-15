@@ -129,10 +129,10 @@ def main():
                         store.add(request.product, request.amount)
                     else:
                         print("На складе не хвататет места! Попробуй уменьшить количество товара!")
-                        pass
+                        continue
                 else:
                     print("Нет нужного количества товара в магазине!")
-                    pass
+                    continue
             else:
                 print("Такого товара нет в магазине!")
                 continue
@@ -148,10 +148,10 @@ def main():
                         shop.add(request.product, request.amount)
                     else:
                         print("В магазине не хвататет места! Попробуй уменьшить количество товара!")
-                        pass
+                        continue
                 else:
                     print("Нет нужного количества товара на складе!")
-                    pass
+                    continue
             else:
                 print("Такого товара нет в магазине!")
                 continue
